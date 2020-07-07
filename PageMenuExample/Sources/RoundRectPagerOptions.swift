@@ -51,4 +51,15 @@ struct RoundRectPagerOption: PageMenuOptions {
         self.isInfinite = isInfinite
         self.tabMenuPosition = tabMenuPosition
     }
+    
+    public var fontSelected: UIFont {
+        return UIFont.systemFont(ofSize: UIFont.systemFontSize)
+    }
+    
+    public var menuItemSpace: CGFloat {
+        return 0
+    }
+    public var underLineSpace: CGFloat {
+        return 0
+    }
 }

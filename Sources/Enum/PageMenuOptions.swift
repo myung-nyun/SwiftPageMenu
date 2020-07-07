@@ -77,6 +77,8 @@ public protocol PageMenuOptions {
     var isInfinite: Bool { get }
 
     var font: UIFont { get }
+    
+    var fontSelected: UIFont { get }
 
     var menuItemSize: PageMenuItemSize { get }
 
@@ -95,6 +97,10 @@ public protocol PageMenuOptions {
     var tabMenuContentInset: UIEdgeInsets { get }
 
     var layout: PageMenuLayout { get }
+    
+    var menuItemSpace: CGFloat { get }
+    
+    var underLineSpace: CGFloat { get }
 }
 
 extension PageMenuOptions {
@@ -141,9 +147,19 @@ public struct DefaultPageMenuOption: PageMenuOptions {
     public var font: UIFont {
         return UIFont.systemFont(ofSize: UIFont.systemFontSize)
     }
-
+    
+    public var fontSelected: UIFont {
+        return UIFont.systemFont(ofSize: UIFont.systemFontSize)
+    }
+    
     public var tabMenuBackgroundColor: UIColor {
         return .white
+    }
+    public var menuItemSpace: CGFloat {
+        return 0
+    }
+    public var underLineSpace: CGFloat {
+        return 0
     }
 
     public init() {}

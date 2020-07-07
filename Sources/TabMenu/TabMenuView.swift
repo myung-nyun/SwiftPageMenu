@@ -57,11 +57,16 @@ class TabMenuView: UIView {
 
         return contentView
     }()
-
+    fileprivate var lineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = .black
+        return lineView
+    }()
     fileprivate lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
+        layout.minimumInteritemSpacing = 100
+        layout.minimumLineSpacing = 200
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
@@ -70,6 +75,7 @@ class TabMenuView: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = self.options.tabMenuContentInset
+        
 
         return collectionView
     }()
@@ -90,6 +96,13 @@ class TabMenuView: UIView {
         self.contentView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
+        self.contentView.addSubview(self.lineView)
+        self.lineView.translatesAutoresizingMaskIntoConstraints = false
+        self.lineView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
+        self.lineView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
+        self.lineView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        self.lineView.heightAnchor.constraint(equalToConstant: options.underLineSpace).isActive = true
+        
         // collection view
         self.contentView.addSubview(self.collectionView)
         self.collectionView.register(TabMenuItemCell.self, forCellWithReuseIdentifier: TabMenuItemCell.cellIdentifier)
@@ -97,7 +110,7 @@ class TabMenuView: UIView {
         self.collectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         self.collectionView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
         self.collectionView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        self.collectionView.bottomAnchor.constraint(equalTo: self.lineView.topAnchor).isActive = true
         self.cellForSize = TabMenuItemCell()
         self.collectionView.scrollsToTop = false
         self.collectionView.reloadData()
@@ -494,10 +507,10 @@ extension TabMenuView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return self.options.menuItemSpace
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return 50.0
     }
 }

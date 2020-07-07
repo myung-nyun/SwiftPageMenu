@@ -44,4 +44,15 @@ struct UnderlinePagerOption: PageMenuOptions {
     public init(isInfinite: Bool = false) {
         self.isInfinite = isInfinite
     }
+    
+    public var fontSelected: UIFont {
+        return UIFont.systemFont(ofSize: UIFont.systemFontSize)
+    }
+    
+    public var menuItemSpace: CGFloat {
+        return 0
+    }
+    public var underLineSpace: CGFloat {
+        return 0
+    }
 }
